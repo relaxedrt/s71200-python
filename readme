@@ -1,0 +1,3 @@
+https://snap7.sourceforge.net/snap7_client.html#target_compatibility
+Para que estos modulos funcionen debemos tener deshabilitada la optimización de acceso al bloque al que queramos acceder,
+debemos tener la protección del plc en Full Acces(no protection) y permitir el acceso con PUT/GET
