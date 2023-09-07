@@ -27,6 +27,12 @@ class comm:
         b = util.get_bool(data, 0, bit)
         return b
     
+    #Debemos introducir en el campo start el byte en el que se aloja la entrada y en el campo  bit el numero de entrada que equivale dentro del byte
+    def read_input(self, byte, bit):
+        data = self.client.read_area(snap7.types.Areas.PE, 0, byte, 1)
+        b = util.get_bool(data, 0, bit)
+        return b
+    
     #Debemos introducir en el campo db el numero del db, en el campo start, el byte en el que empieza el real y en el campo n el número que escribiremos
     def db_write_real(self, db, start, n):
         data = bytearray(4)
@@ -39,11 +45,17 @@ class comm:
         util.set_int(data, 0, n)
         self.client.db_write(db, start, data)
 
-    #Debemos introducir en el campo db el numero del db, en el campo start, el byte en el que se alojael booleano y en el campo value el valor
-    def db_write_bool(self, db, start, value: bool):
+    #Debemos introducir en el campo db el numero del db, en el campo start, el byte en el que se aloja el booleano y en el campo value el valor
+    def db_write_bool(self, db, start, bit, value: bool):
         data = bytearray(1)
-        util.set_bool(data, 0, 0, value)
+        util.set_bool(data, 0, bit, value)
         self.client.db_write(db, start, data)
 
+    #Debemos introducir en el campo start el byte en el que se aloja la salida, en el campo bit el numero de bit de la entrada y en el campo value el valor que le queremos dar
+    def write_output(self, start, bit, value: bool):
+        data = bytearray(1)
+        util.set_bool(data, 0, bit, value)
+        self.client.as_write_area( )
+        self.client.write_area(snap7.types.Areas.PA, 0, start, data)
 
 
